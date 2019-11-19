@@ -1,0 +1,10 @@
+C:\Users\Hasee\Desktop\TextPad\TextPad\bin\Debug\TextPad.exe.config
+C:\Users\Hasee\Desktop\TextPad\TextPad\bin\Debug\TextPad.exe
+C:\Users\Hasee\Desktop\TextPad\TextPad\bin\Debug\TextPad.pdb
+C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.csprojAssemblyReference.cache
+C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.Form1.resources
+C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.Properties.Resources.resources
+C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.csproj.GenerateResource.cache
+C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.csproj.CoreCompileInputs.cache
+C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.exe
+C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.pdb
