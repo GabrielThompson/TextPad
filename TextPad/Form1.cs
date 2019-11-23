@@ -344,5 +344,16 @@ namespace TextPad
             size = Convert.ToInt32(this.toolStripComboBox2.SelectedItem.ToString());
             GetActiveEditor().SelectionFont = new Font(GetActiveEditor().SelectionFont.FontFamily, size, GetActiveEditor().SelectionFont.Style);
         }
+
+        private void 搜索SToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 查找和替换ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FindAndReplace findAndReplaceForm = new FindAndReplace();
+            findAndReplaceForm.ShowDialog();
+        }
     }
 }

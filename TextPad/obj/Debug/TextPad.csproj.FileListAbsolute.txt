@@ -8,3 +8,4 @@ C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.csproj.GenerateResource
 C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.csproj.CoreCompileInputs.cache
 C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.exe
 C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.pdb
+C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.FindAndReplace.resources
