@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static TextPad.FindAndReplace;
 
 namespace TextPad
 {
@@ -25,6 +26,7 @@ namespace TextPad
             if (this.toolStripComboBox2.Items.Count == 0)
                 for (int i = 1; i < 31; i++)
                     this.toolStripComboBox2.Items.Add(i.ToString());
+            
             //CreateMyChildForm();
         }
         int childCount = 0;
@@ -353,7 +355,82 @@ namespace TextPad
         private void 查找和替换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FindAndReplace findAndReplaceForm = new FindAndReplace();
-            findAndReplaceForm.ShowDialog();
+            //打开非模式对话框
+            findAndReplaceForm.Show();
+            //findAndReplaceForm.ShowDialog();
+
+            //创建委托实例，并使用委托的多播使得每一次查找的下一次不用重头开始
+            findAndReplaceForm.SearchEvent += new FindAndReplace.SearchEventHandle(MySearch);    //订阅查询事件
+            findAndReplaceForm.ReplaceEvent += new FindAndReplace.ReplaceEventHandle(MyReplace); //订阅替换事件
+
         }
+
+        private void MySearch(object sender, SearchEventArgClass e)
+        {
+            string strToSearch = e.SearchString;
+            if (strToSearch.Length == 0)
+                return;
+
+            //int start = richTextBox1.SelectionStart;
+            int start = GetActiveEditor().SelectionStart;
+            //start = richTextBox1.Find(strToSearch, start, RichTextBoxFinds.MatchCase);
+            start = GetActiveEditor().Find(strToSearch, start, RichTextBoxFinds.MatchCase);
+            if (start == -1)
+            {
+                MessageBox.Show("已查找到文档的结尾", "查找结束对话框");
+                start = 0;
+            }
+            else
+            {   
+                //查找下一处，从该位置开始查询
+                start = start + strToSearch.Length;
+                //选中查询到的字符串
+                //richTextBox1.Select();
+                //richTextBox1.Focus();
+                GetActiveEditor().Select();
+                GetActiveEditor().Focus();
+            }
+            
+        }
+
+
+        private void MyReplace(object sender, ReplaceEventArgClass e)
+        {
+
+            string strToSearch = e.SearchString;    //要替换的字符串
+
+            string strToReplace = e.ReplaceString;  //新的字符串
+            //如果查找字符为空或新的字符串为空，则不反应
+            if (strToReplace.Length == 0 ||GetActiveEditor().SelectionLength == 0)
+                return;
+            
+            //将选中的字符串替换成新的字符串
+            GetActiveEditor().SelectedText = strToReplace;
+
+            //查找起始位置
+            int start = GetActiveEditor().SelectionStart;
+            start = GetActiveEditor().Find(strToSearch, start, RichTextBoxFinds.MatchCase);
+
+            //查询到尾部，结束查询
+            if (start == -1)
+            {
+
+                MessageBox.Show("已查找到文档的结尾", "查找结束对话框");
+                start = 0;
+            }
+            else
+            {
+                //查找下一处
+                start = start + strToSearch.Length;
+                //选中查询到的字符串
+                GetActiveEditor().Select();
+                GetActiveEditor().Focus();
+            }
+
+            
+
+        }
+
+
     }
 }

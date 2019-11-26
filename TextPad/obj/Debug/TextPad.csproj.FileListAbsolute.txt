@@ -9,3 +9,14 @@ C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.csproj.CoreCompileInput
 C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.exe
 C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.pdb
 C:\Users\Hasee\Desktop\TextPad\TextPad\obj\Debug\TextPad.FindAndReplace.resources
+E:\Visual Studio\TextPad\TextPad\obj\Debug\TextPad.csprojAssemblyReference.cache
+E:\Visual Studio\TextPad\TextPad\obj\Debug\TextPad.Form1.resources
+E:\Visual Studio\TextPad\TextPad\obj\Debug\TextPad.FindAndReplace.resources
+E:\Visual Studio\TextPad\TextPad\obj\Debug\TextPad.Properties.Resources.resources
+E:\Visual Studio\TextPad\TextPad\obj\Debug\TextPad.csproj.GenerateResource.cache
+E:\Visual Studio\TextPad\TextPad\obj\Debug\TextPad.csproj.CoreCompileInputs.cache
+E:\Visual Studio\TextPad\TextPad\obj\Debug\TextPad.exe
+E:\Visual Studio\TextPad\TextPad\obj\Debug\TextPad.pdb
+E:\Visual Studio\TextPad\TextPad\bin\Debug\TextPad.exe.config
+E:\Visual Studio\TextPad\TextPad\bin\Debug\TextPad.exe
+E:\Visual Studio\TextPad\TextPad\bin\Debug\TextPad.pdb

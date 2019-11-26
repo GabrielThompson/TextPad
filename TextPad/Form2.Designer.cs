@@ -37,9 +37,10 @@
             // 
             // Find_Btn
             // 
-            this.Find_Btn.Location = new System.Drawing.Point(295, 10);
+            this.Find_Btn.Location = new System.Drawing.Point(442, 15);
+            this.Find_Btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Find_Btn.Name = "Find_Btn";
-            this.Find_Btn.Size = new System.Drawing.Size(75, 23);
+            this.Find_Btn.Size = new System.Drawing.Size(112, 34);
             this.Find_Btn.TabIndex = 0;
             this.Find_Btn.Text = "查找";
             this.Find_Btn.UseVisualStyleBackColor = true;
@@ -47,17 +48,19 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(18, 18);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(267, 21);
+            this.textBox1.Size = new System.Drawing.Size(398, 28);
             this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
+
             // 
             // Replace_Btn
             // 
-            this.Replace_Btn.Location = new System.Drawing.Point(295, 68);
+            this.Replace_Btn.Location = new System.Drawing.Point(442, 102);
+            this.Replace_Btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Replace_Btn.Name = "Replace_Btn";
-            this.Replace_Btn.Size = new System.Drawing.Size(75, 23);
+            this.Replace_Btn.Size = new System.Drawing.Size(112, 34);
             this.Replace_Btn.TabIndex = 2;
             this.Replace_Btn.Text = "替换";
             this.Replace_Btn.UseVisualStyleBackColor = true;
@@ -65,17 +68,18 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 70);
+            this.textBox2.Location = new System.Drawing.Point(18, 105);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(266, 21);
+            this.textBox2.Size = new System.Drawing.Size(397, 28);
             this.textBox2.TabIndex = 3;
-            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2_TextChanged);
             // 
             // Next_Btn
             // 
-            this.Next_Btn.Location = new System.Drawing.Point(295, 39);
+            this.Next_Btn.Location = new System.Drawing.Point(442, 58);
+            this.Next_Btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Next_Btn.Name = "Next_Btn";
-            this.Next_Btn.Size = new System.Drawing.Size(75, 23);
+            this.Next_Btn.Size = new System.Drawing.Size(112, 34);
             this.Next_Btn.TabIndex = 4;
             this.Next_Btn.Text = "下一个";
             this.Next_Btn.UseVisualStyleBackColor = true;
@@ -83,17 +87,17 @@
             // 
             // FindAndReplace
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 103);
+            this.ClientSize = new System.Drawing.Size(573, 154);
             this.Controls.Add(this.Next_Btn);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.Replace_Btn);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Find_Btn);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FindAndReplace";
             this.Text = "Form2";
-            this.Load += new System.EventHandler(this.FindAndReplace_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
