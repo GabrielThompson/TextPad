@@ -43,12 +43,13 @@ namespace TextPad
         {
             TabPage page = new TabPage(title);
             RichTextBox rtb = new RichTextBox();
+            rtb.AllowDrop = true;
             rtb.Dock = DockStyle.Fill;
             rtb.ContextMenuStrip = this.contextMenuStrip1;
             rtb.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            rtb.EnableAutoDragDrop = true;
+            //rtb.EnableAutoDragDrop = true;
             rtb.HideSelection = false;
-
+            rtb.DragDrop += new DragEventHandler(this.DDrop);
             //this.richTextBox1.TabIndex = 0;
 
             page.Controls.Add(rtb);
@@ -105,6 +106,24 @@ namespace TextPad
                 file.Close();
                 reader.Close();
             }
+        }
+        private void open_file(string title)
+        {
+            String dotformat = title.Substring(title.LastIndexOf(".") + 1);//获取文件格式
+            dotformat = dotformat.ToLower();
+            FileStream file = new FileStream(title, FileMode.Open, FileAccess.Read);
+            StreamReader reader = new StreamReader(file, textformat);
+            RichTextBox rtb = CreateMyTabPage(title);
+            if (dotformat == "rtf")  //如果后缀是 rtf 加载文件进来
+            {
+                rtb.LoadFile(title, RichTextBoxStreamType.RichText);
+            }
+            else
+            {
+                rtb.Text = reader.ReadToEnd();
+            }
+            file.Close();
+            reader.Close();
         }
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -441,7 +460,7 @@ namespace TextPad
             //string[] str = (string[])e.Data.GetData(DataFormats.FileDrop, true);
             string path = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
             Console.WriteLine("!!!!!!!!");
-
+            open_file(path);
         }
 
         private void DEnter(object sender, DragEventArgs e)
