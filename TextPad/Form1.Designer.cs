@@ -444,6 +444,7 @@
             // 
             // contextMenuStrip2
             // 
+            this.contextMenuStrip2.AllowDrop = true;
             this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.关闭ToolStripMenuItem});
@@ -487,7 +488,7 @@
             this.menuStrip2.Location = new System.Drawing.Point(0, 6);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStrip2.Size = new System.Drawing.Size(705, 38);
+            this.menuStrip2.Size = new System.Drawing.Size(525, 38);
             this.menuStrip2.TabIndex = 0;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -496,7 +497,6 @@
             this.toolStripComboBox1.Name = "toolStripComboBox1";
             this.toolStripComboBox1.Size = new System.Drawing.Size(180, 32);
             this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.ToolStripComboBox1_SelectedIndexChanged);
-
             // 
             // toolStripComboBox2
             // 
@@ -512,6 +512,7 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.AllowDrop = true;
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -528,6 +529,8 @@
             this.tabControl1.ShowToolTips = true;
             this.tabControl1.Size = new System.Drawing.Size(1863, 734);
             this.tabControl1.TabIndex = 6;
+            this.tabControl1.DragDrop += new System.Windows.Forms.DragEventHandler(this.DDrop);
+            this.tabControl1.DragEnter += new System.Windows.Forms.DragEventHandler(this.DEnter);
             // 
             // Form1
             // 

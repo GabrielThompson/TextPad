@@ -74,6 +74,7 @@ namespace TextPad
         }
         private String title = "Untitled";  //保存打开的文件的标题
         Encoding textformat = Encoding.UTF8;          //设置文本的格式为 UTF-8
+
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /**
@@ -81,6 +82,7 @@ namespace TextPad
              * 
              * 主要是打开 rtf 格式的文件
              */
+            Console.WriteLine("opening!!");
             openFileDialog1.Filter = "文本文件|*.txt;*.html;*.docx;*.doc;*.rtf|所有文件|*.*"; //文件打开的过滤器
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -373,12 +375,14 @@ namespace TextPad
 
             //int start = richTextBox1.SelectionStart;
             int start = GetActiveEditor().SelectionStart;
+
             //start = richTextBox1.Find(strToSearch, start, RichTextBoxFinds.MatchCase);
             start = GetActiveEditor().Find(strToSearch, start, RichTextBoxFinds.MatchCase);
             if (start == -1)
             {
                 MessageBox.Show("已查找到文档的结尾", "查找结束对话框");
                 start = 0;
+                GetActiveEditor().Select();
             }
             else
             {   
@@ -388,7 +392,7 @@ namespace TextPad
                 //richTextBox1.Select();
                 //richTextBox1.Focus();
                 GetActiveEditor().Select();
-                GetActiveEditor().Focus();
+                //GetActiveEditor().Focus();
             }
             
         }
@@ -401,9 +405,9 @@ namespace TextPad
 
             string strToReplace = e.ReplaceString;  //新的字符串
             //如果查找字符为空或新的字符串为空，则不反应
-            if (strToReplace.Length == 0 ||GetActiveEditor().SelectionLength == 0)
+            if (strToReplace.Length == 0 || GetActiveEditor().SelectionLength == 0)
                 return;
-            
+
             //将选中的字符串替换成新的字符串
             GetActiveEditor().SelectedText = strToReplace;
 
@@ -416,6 +420,7 @@ namespace TextPad
             {
 
                 MessageBox.Show("已查找到文档的结尾", "查找结束对话框");
+                GetActiveEditor().Select();
                 start = 0;
             }
             else
@@ -424,13 +429,32 @@ namespace TextPad
                 start = start + strToSearch.Length;
                 //选中查询到的字符串
                 GetActiveEditor().Select();
-                GetActiveEditor().Focus();
+                //GetActiveEditor().Focus();
             }
+        }
 
-            
+  
+
+        private void DDrop(object sender, DragEventArgs e)
+        {
+            //e.Effect = DragDropEffects.Copy;
+            //string[] str = (string[])e.Data.GetData(DataFormats.FileDrop, true);
+            string path = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            Console.WriteLine("!!!!!!!!");
 
         }
 
-
+        private void DEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+                Console.WriteLine("Draging1!!!");
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
     }
 }

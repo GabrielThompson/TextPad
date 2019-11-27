@@ -44,14 +44,14 @@ namespace TextPad
         private void Next_Btn_Click(object sender, EventArgs e)
         {
 
-            //如果查询内容为空，无反应
-            if (this.textBox1.Text.Length == 0)
-                return;
-            //触发查找事件
-            else if (SearchEvent != null)
+            //if (this.textBox2.Text.Length == 0) return;
+
+            if (ReplaceEvent != null)
             {
-                SearchEventArgClass ee = new SearchEventArgClass(this.textBox1.Text);
-                SearchEvent(sender, ee);
+
+                ReplaceEventArgClass ee = new ReplaceEventArgClass(this.textBox1.Text, this.textBox1.Text);
+
+                ReplaceEvent(sender, ee);
             }
         }
 
