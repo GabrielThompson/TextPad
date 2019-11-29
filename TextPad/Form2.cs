@@ -19,12 +19,12 @@ namespace TextPad
 
         private void Find_Btn_Click(object sender, EventArgs e)
         {
-            if (this.textBox1.Text.Length == 0)
+            /*if (this.textBox1.Text.Length == 0)
                 return;
             if(SearchEvent != null)
             {
                 SearchEventArgClass ee = new 
-            }
+            }*/
         }
 
         private void Next_Btn_Click(object sender, EventArgs e)
