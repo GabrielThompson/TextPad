@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static TextPad.FindAndReplace;
 
 namespace TextPad
 {
@@ -54,10 +55,11 @@ namespace TextPad
             rtb.TextChanged += ischange; //文本框内容被修改后触发ischange事件
 
             //富文本框属性初始化
+            rtb.AllowDrop = true;
             rtb.Dock = DockStyle.Fill;
             rtb.ContextMenuStrip = this.contextMenuStrip1;
             rtb.Font = new System.Drawing.Font("微软雅黑", 15F,System.Drawing.FontStyle.Regular,System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            rtb.EnableAutoDragDrop = true;
+            rtb.DragDrop += new DragEventHandler(this.DDrop);
             rtb.HideSelection = false;
 
             page.Controls.Add(rtb); //将富文本框控件添加到TabPage控件中
@@ -106,7 +108,24 @@ namespace TextPad
                 reader.Close();
             }
         }
-
+        private void open_file(string title)
+        {
+            String dotformat = title.Substring(title.LastIndexOf(".") + 1);//获取文件格式
+            dotformat = dotformat.ToLower();
+            FileStream file = new FileStream(title, FileMode.Open, FileAccess.Read);
+            StreamReader reader = new StreamReader(file, textformat);
+            RichTextBox rtb = CreateMyTabPage(title);
+            if (dotformat == "rtf")  //如果后缀是 rtf 加载文件进来
+            {
+                rtb.LoadFile(title, RichTextBoxStreamType.RichText);
+            }
+            else
+            {
+                rtb.Text = reader.ReadToEnd();
+            }
+            file.Close();
+            reader.Close();
+        }
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) //保存文件
         {
             if (tabControl1.SelectedTab.Text.Contains("."))//判断当前文件是否为新建文件
@@ -278,12 +297,95 @@ namespace TextPad
         private void 查找和替换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FindAndReplace findAndReplaceForm = new FindAndReplace();
-            findAndReplaceForm.ShowDialog();
+            //打开非模式对话框
+            findAndReplaceForm.Show();
+            //findAndReplaceForm.ShowDialog();
+
+            //创建委托实例，并使用委托的多播使得每一次查找的下一次不用重头开始
+            findAndReplaceForm.SearchEvent += new FindAndReplace.SearchEventHandle(MySearch);    //订阅查询事件
+            findAndReplaceForm.ReplaceEvent += new FindAndReplace.ReplaceEventHandle(MyReplace); //订阅替换事件
         }
 
         private void 退出XToolStripMenuItem_Click(object sender, EventArgs e)
         {
             关闭ToolStripMenuItem_Click(sender, e);
+        }
+        private void MySearch(object sender, SearchEventArgClass e)
+        {
+            string strToSearch = e.SearchString;
+            if (strToSearch.Length == 0)
+                return;
+
+            //int start = richTextBox1.SelectionStart;
+            int start = GetActiveEditor().SelectionStart;
+
+            //start = richTextBox1.Find(strToSearch, start, RichTextBoxFinds.MatchCase);
+            start = GetActiveEditor().Find(strToSearch, start, RichTextBoxFinds.MatchCase);
+            if (start == -1)
+            {
+                MessageBox.Show("已查找到文档的结尾", "查找结束对话框");
+                start = 0;
+                GetActiveEditor().Select();
+            }
+            else
+            {
+                //查找下一处，从该位置开始查询
+                start = start + strToSearch.Length;
+                //选中查询到的字符串
+                GetActiveEditor().Select();
+            }
+
+        }
+        private void MyReplace(object sender, ReplaceEventArgClass e)
+        {
+
+            string strToSearch = e.SearchString;    //要替换的字符串
+
+            string strToReplace = e.ReplaceString;  //新的字符串
+            //如果查找字符为空或新的字符串为空，则不反应
+            if (strToReplace.Length == 0 || GetActiveEditor().SelectionLength == 0)
+                return;
+
+            //将选中的字符串替换成新的字符串
+            GetActiveEditor().SelectedText = strToReplace;
+
+            //查找起始位置
+            int start = GetActiveEditor().SelectionStart;
+            start = GetActiveEditor().Find(strToSearch, start, RichTextBoxFinds.MatchCase);
+
+            //查询到尾部，结束查询
+            if (start == -1)
+            {
+                MessageBox.Show("已查找到文档的结尾", "查找结束对话框");
+                GetActiveEditor().Select();
+                start = 0;
+            }
+            else
+            {
+                //查找下一处
+                start = start + strToSearch.Length;
+                //选中查询到的字符串
+                GetActiveEditor().Select();
+            }
+        }
+        private void DDrop(object sender, DragEventArgs e)
+        {
+            string path = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            Console.WriteLine("!!!!!!!!");
+            open_file(path);
+        }
+
+        private void DEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+                Console.WriteLine("Draging1!!!");
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
         }
     }
 }
